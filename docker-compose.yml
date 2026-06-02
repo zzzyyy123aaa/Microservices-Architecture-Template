@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   postgres:
     image: postgres:15-alpine
@@ -30,31 +29,41 @@ services:
     depends_on: [prometheus]
 
   gateway:
-    build: { context: ., dockerfile: gateway/Dockerfile }
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
     ports: ["8000:8000"]
     environment: { NODE_ENV: production, JWT_SECRET: your-secret-key }
     depends_on: [consul]
 
   user-service:
-    build: { context: ., dockerfile: services/user-service/Dockerfile }
+    build:
+      context: .
+      dockerfile: services/user-service/Dockerfile
     ports: ["8001:8001"]
     environment: { NODE_ENV: production, DB_HOST: postgres, DB_NAME: user_db, JWT_SECRET: your-secret-key }
     depends_on: [postgres]
 
   order-service:
-    build: { context: ., dockerfile: services/order-service/Dockerfile }
+    build:
+      context: .
+      dockerfile: services/order-service/Dockerfile
     ports: ["8002:8002"]
     environment: { NODE_ENV: production, DB_HOST: postgres, DB_NAME: order_db }
     depends_on: [postgres]
 
   product-service:
-    build: { context: ., dockerfile: services/product-service/Dockerfile }
+    build:
+      context: .
+      dockerfile: services/product-service/Dockerfile
     ports: ["8003:8003"]
     environment: { NODE_ENV: production, DB_HOST: postgres, DB_NAME: product_db }
     depends_on: [postgres]
 
   frontend:
-    build: { context: ., dockerfile: frontend/Dockerfile }
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
     ports: ["3000:80"]
     depends_on: [gateway]
 
