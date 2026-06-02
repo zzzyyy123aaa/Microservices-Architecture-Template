@@ -1,1 +1,14 @@
-{"extends": "../../tsconfig.base.json", "compilerOptions": {"emitDecoratorMetadata": true, "experimentalDecorators": true, "outDir": "./dist", "baseUrl": "./", "paths": {"@shared/*": ["../../shared/libs/*"]}}, "include": ["src/**/*"]}
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "outDir": "./dist",
+    "rootDir": "../..",
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["../../shared/*"]
+    }
+  },
+  "include": ["src/**/*", "../../shared/**/*"]
+}

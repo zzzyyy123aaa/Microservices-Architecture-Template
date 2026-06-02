@@ -15,6 +15,10 @@
     "@nestjs/terminus": "^10.2.0",
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/passport": "^10.0.3",
+    "@nestjs/config": "^3.1.1",
+    "@shared/types": "workspace:*",
+    "@shared/constants": "workspace:*",
+    "@shared/libs": "workspace:*",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "helmet": "^7.1.0",
@@ -30,6 +34,7 @@
     "@nestjs/cli": "^10.3.0",
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.0",
+    "@types/passport-jwt": "^4.0.0",
     "typescript": "^5.3.3"
   }
 }

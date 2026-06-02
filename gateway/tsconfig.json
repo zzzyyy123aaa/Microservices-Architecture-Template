@@ -4,11 +4,11 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "rootDir": "..",
+    "baseUrl": ".",
     "paths": {
-      "@shared/*": ["../shared/libs/*"],
-      "@types/*": ["../shared/types/*"]
+      "@shared/*": ["../shared/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "../shared/**/*"]
 }

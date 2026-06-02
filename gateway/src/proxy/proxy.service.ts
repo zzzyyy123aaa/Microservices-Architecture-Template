@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { SERVICES, SERVICE_PORTS } from '@shared/constants';
+import { SERVICES, SERVICE_PORTS } from '../../shared/constants';
 
 interface ServiceRoute { path: string; target: string; }
 
