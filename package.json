@@ -1,0 +1,22 @@
+{
+  "name": "test-microservices",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Microservices project with NestJS and Vue 3",
+  "scripts": {
+    "dev": "pnpm -r run dev",
+    "dev:gateway": "pnpm --filter gateway run dev",
+    "dev:user": "pnpm --filter user-service run dev",
+    "dev:order": "pnpm --filter order-service run dev",
+    "dev:product": "pnpm --filter product-service run dev",
+    "dev:frontend": "pnpm --filter frontend run dev",
+    "build": "pnpm -r run build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:build": "docker-compose build"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}
