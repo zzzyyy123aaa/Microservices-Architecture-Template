@@ -12,7 +12,7 @@ export class UsersService {
     const existing = await this.userRepo.findOne({ where: [{ username: dto.username }, { email: dto.email }] });
     if (existing) throw new ConflictException('Username or email already exists');
     const user = this.userRepo.create(dto);
-    const saved = await this.userRepo.save(user);
+    const saved = await this.userRepo.save(user) as unknown as User;
     const { password, ...result } = saved;
     return result;
   }

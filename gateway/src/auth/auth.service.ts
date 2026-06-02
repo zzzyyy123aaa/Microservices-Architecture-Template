@@ -1,6 +1,12 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { JwtPayload } from '../../shared/types';
+
+export interface JwtPayload {
+  sub: string;
+  username: string;
+  email: string;
+  roles: string[];
+}
 
 @Injectable()
 export class AuthService {
