@@ -14,11 +14,13 @@ export class OrdersService {
     return this.orderRepo.save(order);
   }
 
-  async findAll(page = 1, pageSize = 10, userId?: string, status?: string) {
+  async findAll(page?: number | string, pageSize?: number | string, userId?: string, status?: string) {
+    const p = Math.max(1, Number(page) || 1);
+    const ps = Math.max(1, Number(pageSize) || 10);
     const qb = this.orderRepo.createQueryBuilder('o').leftJoinAndSelect('o.items', 'items').orderBy('o.createdAt', 'DESC');
     if (userId) qb.andWhere('o.userId = :userId', { userId });
     if (status) qb.andWhere('o.status = :status', { status });
-    const [orders, total] = await qb.skip((page - 1) * pageSize).take(pageSize).getManyAndCount();
+    const [orders, total] = await qb.skip((p - 1) * ps).take(ps).getManyAndCount();
     return { orders, total };
   }
 

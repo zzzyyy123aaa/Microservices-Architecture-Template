@@ -17,8 +17,10 @@ export class UsersService {
     return result;
   }
 
-  async findAll(page = 1, pageSize = 10) {
-    const [users, total] = await this.userRepo.findAndCount({ skip: (page - 1) * pageSize, take: pageSize, order: { createdAt: 'DESC' } });
+  async findAll(page?: number | string, pageSize?: number | string) {
+    const p = Math.max(1, Number(page) || 1);
+    const ps = Math.max(1, Number(pageSize) || 10);
+    const [users, total] = await this.userRepo.findAndCount({ skip: (p - 1) * ps, take: ps, order: { createdAt: 'DESC' } });
     return { users: users.map(({ password, ...rest }) => rest), total };
   }
 

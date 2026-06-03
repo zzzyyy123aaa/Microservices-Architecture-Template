@@ -10,14 +10,16 @@ export class ProductsService {
   async create(dto: any) { return this.productRepo.save(this.productRepo.create(dto)); }
 
   async findAll(query: any) {
-    const { keyword, category, minPrice, maxPrice, page = 1, pageSize = 10, sortBy = 'createdAt', sortOrder = 'DESC' } = query;
+    const { keyword, category, minPrice, maxPrice, page, pageSize, sortBy = 'createdAt', sortOrder = 'DESC' } = query;
+    const p = Math.max(1, Number(page) || 1);
+    const ps = Math.max(1, Number(pageSize) || 10);
     const qb = this.productRepo.createQueryBuilder('p').where('p.isActive = :active', { active: true });
     if (keyword) qb.andWhere('(p.name LIKE :kw OR p.description LIKE :kw)', { kw: `%${keyword}%` });
     if (category) qb.andWhere('p.category = :cat', { cat: category });
     if (minPrice) qb.andWhere('p.price >= :min', { min: minPrice });
     if (maxPrice) qb.andWhere('p.price <= :max', { max: maxPrice });
     qb.orderBy(`p.${sortBy}`, sortOrder);
-    const [products, total] = await qb.skip((page - 1) * pageSize).take(pageSize).getManyAndCount();
+    const [products, total] = await qb.skip((p - 1) * ps).take(ps).getManyAndCount();
     return { products, total };
   }
 
