@@ -1,11 +1,9 @@
 FROM node:18-alpine AS builder
-RUN apk add --no-cache python3 make g++
 WORKDIR /app
 
-COPY services/user-service/package.json ./
-RUN npm config set registry https://registry.npmmirror.com && npm install -g pnpm && pnpm install
-
 COPY services/user-service/ ./
+RUN npm config set registry https://registry.npmmirror.com && npm install -g pnpm && rm -rf node_modules pnpm-lock.yaml && pnpm install --no-frozen-lockfile
+
 RUN pnpm build
 
 FROM node:18-alpine
