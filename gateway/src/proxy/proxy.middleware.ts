@@ -27,7 +27,7 @@ export class ProxyMiddleware implements NestMiddleware {
     const proxy = createProxyMiddleware({
       target,
       changeOrigin: true,
-      pathRewrite: (path) => path,
+      pathRewrite: (path) => path.replace(/^\/api/, '') || '/',
       onError: (err, req, res) => {
         this.logger.error(`Proxy error: ${err.message}`);
         (res as Response).status(502).json({
